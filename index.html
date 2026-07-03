@@ -1,0 +1,1906 @@
+<!doctype html>
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>装配式专项项目管理汇报 - 精修版</title>
+<style>
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800;900&family=Noto+Serif+SC:wght@600;700;900&family=IBM+Plex+Mono:wght@500;600;700&display=swap');
+
+* { box-sizing: border-box; }
+:root {
+    --stage-bg: #e9eef6;
+    --slide-bg: #f7f9fc;
+    --paper: #ffffff;
+    --ink: #12213b;
+    --ink-soft: #243653;
+    --muted: #5d6d85;
+    --blue: #1d4f91;
+    --blue-2: #2f7dc8;
+    --blue-3: #dfeaf7;
+    --red: #bc2e2e;
+    --gold: #bd7d20;
+    --line: #d7e0ec;
+    --panel: #eef4fb;
+}
+body { background: var(--stage-bg); }
+.deck-stage { background: transparent; }
+.slide {
+    font-family: "Noto Sans SC", sans-serif;
+    color: var(--ink);
+    background:
+        linear-gradient(90deg, rgba(29,79,145,.055) 1px, transparent 1px) 0 0/80px 80px,
+        linear-gradient(0deg, rgba(29,79,145,.045) 1px, transparent 1px) 0 0/80px 80px,
+        #f7f9fc;
+    isolation: isolate;
+    transform: translateX(0) scale(1);
+}
+.slide.visible:not(.active):not(.slide-out-next):not(.slide-out-prev) {
+    opacity: 0;
+    pointer-events: none;
+}
+.slide.slide-in-next { animation: slideInNext 780ms cubic-bezier(.18,.86,.28,1) both; }
+.slide.slide-out-next { animation: slideOutNext 780ms cubic-bezier(.18,.86,.28,1) both; }
+.slide.slide-in-prev { animation: slideInPrev 780ms cubic-bezier(.18,.86,.28,1) both; }
+.slide.slide-out-prev { animation: slideOutPrev 780ms cubic-bezier(.18,.86,.28,1) both; }
+@keyframes slideInNext {
+    from { opacity: 0; transform: translateX(76px) scale(.985); filter: blur(8px); }
+    to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+@keyframes slideOutNext {
+    from { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+    to { opacity: 0; transform: translateX(-54px) scale(.985); filter: blur(8px); }
+}
+@keyframes slideInPrev {
+    from { opacity: 0; transform: translateX(-76px) scale(.985); filter: blur(8px); }
+    to { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+}
+@keyframes slideOutPrev {
+    from { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+    to { opacity: 0; transform: translateX(54px) scale(.985); filter: blur(8px); }
+}
+.slide::before {
+    content: "";
+    position: absolute;
+    left: 96px;
+    top: 70px;
+    width: 1728px;
+    height: 940px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.72);
+    box-shadow: 0 26px 72px rgba(18,33,59,.09);
+    z-index: -1;
+}
+.topline {
+    position: absolute;
+    left: 96px;
+    top: 70px;
+    width: 1728px;
+    height: 8px;
+    background: linear-gradient(90deg, var(--blue), var(--blue-2) 62%, var(--red));
+    transform-origin: left center;
+}
+.mono, .eyebrow, .page, .tag, .axis-title, .model-title, .progress {
+    font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+}
+h1, h2, h3, p { margin: 0; }
+.reveal {
+    opacity: 1;
+    transform: translateY(0);
+}
+.slide.active .topline { animation: lineFade 640ms ease-out both; }
+.slide.active .reveal {
+    animation: rise 760ms cubic-bezier(.18,.86,.28,1) both;
+}
+.slide.active .delay-1 { animation-delay: 90ms; }
+.slide.active .delay-2 { animation-delay: 180ms; }
+.slide.active .delay-3 { animation-delay: 270ms; }
+.slide.active .delay-4 { animation-delay: 360ms; }
+.slide.active .delay-5 { animation-delay: 450ms; }
+.slide.active .delay-6 { animation-delay: 540ms; }
+.slide.active .keyword,
+.slide.active .insight-card,
+.slide.active .lock,
+.slide.active .flow-step,
+.slide.active .source-card,
+.slide.active .doc-stack span,
+.slide.active .principles span,
+.slide.active .require-grid span,
+.slide.active .forms-grid span,
+.slide.active .dashboard span,
+.slide.active .roadmap div {
+    animation: floatIn 620ms cubic-bezier(.18,.86,.28,1) both;
+}
+.slide.active .keyword:nth-child(1), .slide.active .insight-card:nth-child(1) { animation-delay: 280ms; }
+.slide.active .keyword:nth-child(2), .slide.active .insight-card:nth-child(2) { animation-delay: 340ms; }
+.slide.active .keyword:nth-child(3), .slide.active .insight-card:nth-child(3) { animation-delay: 400ms; }
+.slide.active .keyword:nth-child(4) { animation-delay: 460ms; }
+.slide.active .keyword:nth-child(5) { animation-delay: 520ms; }
+.slide.active .keyword:nth-child(6) { animation-delay: 580ms; }
+@keyframes rise {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes draw {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+@keyframes lineFade {
+    from { opacity: .25; }
+    to { opacity: 1; }
+}
+@keyframes floatIn {
+    from { opacity: 0; transform: translateY(18px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.header {
+    position: absolute;
+    left: 148px;
+    top: 118px;
+    width: 1624px;
+    display: grid;
+    grid-template-columns: 140px 1fr 340px;
+    column-gap: 36px;
+    align-items: start;
+}
+.page {
+    color: var(--blue);
+    font-size: 70px;
+    font-weight: 700;
+    line-height: .86;
+}
+.page span {
+    display: block;
+    margin-top: 20px;
+    width: 88px;
+    height: 4px;
+    background: var(--red);
+    transform-origin: left center;
+    animation: draw 900ms ease-out .2s both;
+}
+.eyebrow {
+    color: var(--blue);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+h1 {
+    margin-top: 14px;
+    max-width: 1030px;
+    color: var(--ink);
+    font-size: 51px;
+    line-height: 1.15;
+    font-weight: 900;
+}
+.meta-panel {
+    justify-self: end;
+    width: 320px;
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 18px 20px;
+    box-shadow: 0 12px 28px rgba(18,33,59,.06);
+}
+.meta-panel .tag {
+    color: var(--red);
+    font-size: 14px;
+    font-weight: 700;
+}
+.meta-panel p {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.55;
+}
+.keyword-row {
+    position: absolute;
+    left: 324px;
+    top: 278px;
+    width: 1028px;
+    display: grid;
+    grid-template-columns: repeat(var(--kw-count), 1fr);
+    gap: 11px;
+}
+.keyword {
+    min-height: 56px;
+    border: 1px solid var(--line);
+    background: #fff;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--blue);
+    font-size: 19px;
+    font-weight: 800;
+    box-shadow: 0 10px 20px rgba(18,33,59,.045);
+}
+.core-band {
+    position: absolute;
+    left: 148px;
+    top: 366px;
+    width: 880px;
+    min-height: 132px;
+    background: #11284f;
+    color: #fff;
+    padding: 27px 34px;
+    display: grid;
+    grid-template-columns: 124px 1fr;
+    gap: 22px;
+    align-items: center;
+    box-shadow: 16px 18px 0 rgba(29,79,145,.11);
+}
+.core-band .label {
+    color: #9fc8f1;
+    font-size: 17px;
+    font-weight: 700;
+}
+.core-band p {
+    font-family: "Noto Serif SC", serif;
+    font-size: 27px;
+    line-height: 1.42;
+    font-weight: 700;
+}
+.left-grid {
+    position: absolute;
+    left: 148px;
+    top: 536px;
+    width: 880px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+.insight-card {
+    min-height: 150px;
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 16px;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 20px 20px 18px 0;
+    box-shadow: 0 12px 28px rgba(18,33,59,.055);
+}
+.insight-card.wide {
+    grid-column: 1 / -1;
+    min-height: 136px;
+}
+.card-index {
+    height: 42px;
+    margin-left: 14px;
+    display: grid;
+    place-items: center;
+    background: var(--panel);
+    color: var(--blue);
+    font-size: 17px;
+    font-weight: 700;
+}
+.insight-card h3 {
+    color: var(--ink);
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1.1;
+}
+.insight-card p {
+    margin-top: 9px;
+    color: var(--ink-soft);
+    font-size: 17px;
+    line-height: 1.48;
+    font-weight: 500;
+}
+.right-model {
+    position: absolute;
+    right: 148px;
+    top: 366px;
+    width: 662px;
+    height: 562px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #ffffff 0%, #f1f6fb 100%);
+    padding: 28px 30px;
+    box-shadow: 0 18px 42px rgba(18,33,59,.08);
+}
+.model-title {
+    display: flex;
+    justify-content: space-between;
+    color: var(--blue);
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 15px;
+}
+.axis {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr;
+    gap: 14px;
+    align-items: stretch;
+}
+.axis-col {
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.8);
+    padding: 16px;
+}
+.axis-title {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.object-list, .clause-grid, .require-grid, .bim-grid, .forms-grid, .dashboard, .kpi-grid, .knowledge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+}
+.object-list span, .doc-stack span, .clause-grid span, .accept-grid span, .principles span,
+.require-grid span, .outcome-three span, .bim-grid span, .forms-grid span, .knowledge-grid span,
+.task-types span, .dashboard span, .kpi-grid span {
+    min-height: 38px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: var(--blue-3);
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 800;
+    padding: 6px 8px;
+}
+.arrow {
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+.arrow::before {
+    content: "";
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(var(--blue), var(--red));
+}
+.arrow::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid var(--red);
+}
+.chain {
+    display: grid;
+    gap: 9px;
+}
+.chain-item {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    min-height: 54px;
+    border: 1px solid var(--line);
+    background: #fff;
+}
+.chain-item b {
+    display: grid;
+    place-items: center;
+    background: #11284f;
+    color: #fff;
+    font-size: 16px;
+}
+.chain-item span {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    color: var(--ink-soft);
+    font-size: 15px;
+    font-weight: 700;
+}
+.locks {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+.lock {
+    min-height: 92px;
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 12px 9px;
+    text-align: center;
+}
+.lock strong {
+    display: block;
+    color: var(--blue);
+    font-size: 24px;
+    line-height: 1;
+}
+.lock span {
+    display: block;
+    margin-top: 9px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+.upgrade, .accept-grid, .outcome-three, .task-types, .kpi-grid {
+    margin-top: 16px;
+    border: 1px solid rgba(188,46,46,.24);
+    background: #fff;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.upgrade div {
+    min-height: 67px;
+    padding: 12px 8px;
+    text-align: center;
+    border-right: 1px solid var(--line);
+}
+.upgrade div:last-child { border-right: 0; }
+.upgrade b {
+    display: block;
+    color: var(--red);
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+.upgrade span {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+.source-map {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+.source-card {
+    min-height: 122px;
+    border: 1px solid var(--line);
+    background: #fff;
+    padding: 16px 14px;
+}
+.source-card b {
+    display: block;
+    color: var(--blue);
+    font-size: 18px;
+    line-height: 1.2;
+}
+.source-card span {
+    display: block;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+.risk-bars {
+    margin-top: 18px;
+    display: grid;
+    gap: 9px;
+}
+.risk-bars div {
+    height: 28px;
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    align-items: center;
+    gap: 12px;
+    color: var(--ink-soft);
+    font-size: 14px;
+    font-weight: 800;
+}
+.risk-bars b {
+    height: 9px;
+    background: linear-gradient(90deg, var(--blue), var(--red));
+    display: block;
+}
+.triangle {
+    position: relative;
+    margin: 14px auto 0;
+    width: 390px;
+    height: 164px;
+}
+.triangle::before {
+    content: "";
+    position: absolute;
+    left: 76px;
+    right: 76px;
+    top: 31px;
+    bottom: 20px;
+    border: 1px solid var(--line);
+    transform: skewX(-18deg);
+    background: rgba(223,234,247,.42);
+}
+.tri-node, .tri-center {
+    position: absolute;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    background: #11284f;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+.tri-node { width: 96px; height: 52px; }
+.n-top { left: 147px; top: 0; }
+.n-left { left: 16px; bottom: 8px; }
+.n-right { right: 16px; bottom: 8px; }
+.tri-center { left: 138px; top: 72px; width: 114px; height: 58px; background: #fff; color: var(--blue); border: 1px solid var(--line); }
+.doc-stack {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 9px;
+}
+.clause-grid { margin-top: 16px; grid-template-columns: repeat(3, 1fr); }
+.risk-list {
+    margin-top: 16px;
+    border: 1px solid rgba(188,46,46,.32);
+    background: #fff;
+    padding: 18px;
+}
+.risk-list b, .ratio-panel b, .single-source b, .closed-loop b, .capacity b, .risk-translation b, .final-goal b {
+    display: block;
+    color: var(--red);
+    font-size: 19px;
+    margin-bottom: 8px;
+}
+.risk-list span, .ratio-panel span, .single-source span, .closed-loop span, .capacity span, .risk-translation span, .final-goal span {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+.accept-grid { grid-template-columns: repeat(4, 1fr); }
+.principles {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 9px;
+}
+.principles span {
+    min-height: 104px;
+    background: #fff;
+    writing-mode: vertical-rl;
+    font-size: 21px;
+    color: var(--blue);
+    border: 1px solid var(--line);
+}
+.gate-track, .milestone-line, .service-flow, .stage-gates {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+    gap: 8px;
+}
+.flow-step {
+    min-height: 76px;
+    border: 1px solid var(--line);
+    background: #fff;
+    text-align: center;
+    padding: 10px 6px;
+    position: relative;
+}
+.flow-step b {
+    display: block;
+    color: var(--red);
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+.flow-step span {
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.24;
+    font-weight: 800;
+}
+.ratio-panel, .single-source, .closed-loop, .capacity, .risk-translation, .final-goal {
+    margin-top: 18px;
+    padding: 18px;
+    border: 1px solid rgba(188,46,46,.26);
+    background: #fff;
+}
+.require-grid {
+    margin-top: 22px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.milestone-line {
+    grid-template-columns: repeat(5, 1fr);
+}
+.outcome-three {
+    grid-template-columns: repeat(3, 1fr);
+}
+.data-loop {
+    position: relative;
+    margin: 26px auto 18px;
+    width: 520px;
+    height: 188px;
+}
+.data-loop span {
+    position: absolute;
+    width: 116px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    background: #11284f;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 900;
+}
+.data-loop::before {
+    content: "";
+    position: absolute;
+    left: 64px;
+    right: 64px;
+    top: 28px;
+    bottom: 28px;
+    border: 2px solid var(--blue);
+}
+.data-loop span:nth-child(1) { left: 0; top: 0; }
+.data-loop span:nth-child(2) { right: 0; top: 0; }
+.data-loop span:nth-child(3) { right: 0; bottom: 0; }
+.data-loop span:nth-child(4) { left: 0; bottom: 0; }
+.bim-grid { grid-template-columns: repeat(3, 1fr); }
+.service-flow {
+    margin-top: 22px;
+    grid-template-columns: repeat(7, 1fr);
+}
+.service-flow .flow-step {
+    min-height: 92px;
+}
+.forms-grid {
+    margin-top: 18px;
+    grid-template-columns: repeat(5, 1fr);
+}
+.forms-grid span { min-height: 70px; font-size: 14px; }
+.raci {
+    width: 100%;
+    margin-top: 22px;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 14px;
+    color: var(--ink);
+}
+.raci th, .raci td {
+    border: 1px solid var(--line);
+    padding: 10px 8px;
+    text-align: center;
+    font-weight: 800;
+}
+.raci th { background: #11284f; color: #fff; }
+.raci td:first-child { text-align: left; color: var(--blue); }
+.knowledge-grid {
+    margin-top: 18px;
+    grid-template-columns: repeat(5, 1fr);
+}
+.knowledge-grid span { min-height: 64px; font-size: 14px; }
+.task-types {
+    margin-top: 22px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.task-types span { min-height: 76px; background: #fff; border: 1px solid var(--line); color: var(--blue); }
+.dashboard {
+    margin-top: 16px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.dashboard span {
+    background: #11284f;
+    color: #fff;
+}
+.kpi-grid { grid-template-columns: repeat(4, 1fr); }
+.roadmap {
+    margin-top: 22px;
+    display: grid;
+    gap: 12px;
+}
+.roadmap div {
+    min-height: 86px;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+}
+.roadmap b {
+    display: block;
+    color: var(--blue);
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+.roadmap span {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.35;
+    font-weight: 700;
+}
+.stage-gates { grid-template-columns: repeat(6, 1fr); }
+.stage-gates .flow-step { min-height: 70px; }
+.final-goal { margin-top: 14px; }
+.footer-note {
+    position: absolute;
+    left: 148px;
+    bottom: 88px;
+    width: 880px;
+    min-height: 54px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    align-items: center;
+    gap: 14px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.42;
+    font-weight: 700;
+}
+.footer-note span {
+    color: var(--red);
+    font-weight: 900;
+    border-top: 4px solid var(--red);
+    padding-top: 8px;
+}
+.progress {
+    position: absolute;
+    right: 148px;
+    bottom: 94px;
+    color: var(--muted);
+    font-size: 16px;
+    font-weight: 700;
+}
+.deck-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: rgba(12, 28, 51, .72);
+    border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(12px);
+    border-radius: 999px;
+    opacity: .22;
+    transition: opacity .25s ease, transform .25s ease;
+}
+.deck-controls:hover { opacity: .96; transform: translateX(-50%) translateY(-2px); }
+.deck-controls button {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255,255,255,.94);
+    color: var(--blue);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+.deck-controls .counter {
+    color: #fff;
+    min-width: 66px;
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    font-weight: 700;
+}
+.edit-toolbar {
+    position: fixed;
+    right: 22px;
+    top: 22px;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(12, 28, 51, .76);
+    border: 1px solid rgba(255,255,255,.14);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    opacity: .28;
+    transition: opacity .25s ease;
+}
+.edit-toolbar:hover, body.edit-mode .edit-toolbar { opacity: .98; }
+.edit-toolbar button {
+    border: 0;
+    background: rgba(255,255,255,.94);
+    color: var(--blue);
+    min-width: 72px;
+    height: 34px;
+    padding: 0 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+}
+.edit-toolbar button[data-edit-export] {
+    background: #dcecff;
+}
+.edit-status {
+    min-width: 92px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+body.edit-mode .slide.active [contenteditable="true"] {
+    outline: 2px dashed rgba(188,46,46,.58);
+    outline-offset: 3px;
+    background-color: rgba(255, 246, 210, .42);
+    cursor: text;
+}
+body.edit-mode .deck-controls {
+    opacity: .08;
+    pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+    .slide.slide-in-next,
+    .slide.slide-out-next,
+    .slide.slide-in-prev,
+    .slide.slide-out-prev,
+    .slide.active .reveal,
+    .slide.active .keyword,
+    .slide.active .insight-card {
+        animation-duration: .01ms !important;
+    }
+}
+</style>
+
+<style id="refined-layout-fix">
+/* Refined final deck: embed edited text, remove editing chrome, stabilize typography. */
+.edit-toolbar {
+    display: none !important;
+}
+.deck-controls {
+    bottom: 18px !important;
+    opacity: .05 !important;
+    transform: translateX(-50%) scale(.88) !important;
+}
+.deck-controls:hover {
+    opacity: .78 !important;
+    transform: translateX(-50%) translateY(-2px) scale(.92) !important;
+}
+.slide {
+    font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif !important;
+}
+h1 {
+    letter-spacing: 0 !important;
+    max-width: 1080px !important;
+}
+.keyword {
+    line-height: 1.25 !important;
+    white-space: normal !important;
+}
+.core-band {
+    height: auto !important;
+    min-height: 132px !important;
+    align-items: center !important;
+    overflow: hidden !important;
+}
+.core-band .label {
+    line-height: 1.25 !important;
+}
+.core-band p {
+    font-size: 28px !important;
+    line-height: 1.36 !important;
+    letter-spacing: 0 !important;
+}
+.core-band p br {
+    display: block !important;
+    content: "" !important;
+    margin-top: 2px !important;
+}
+.insight-card {
+    overflow: hidden !important;
+}
+.insight-card h3 {
+    letter-spacing: 0 !important;
+}
+.insight-card p {
+    font-size: 17px !important;
+    line-height: 1.45 !important;
+    letter-spacing: 0 !important;
+}
+.insight-card.wide {
+    min-height: 132px !important;
+}
+.right-model {
+    overflow: hidden !important;
+}
+.right-model span,
+.right-model b,
+.right-model strong,
+.right-model td,
+.right-model th {
+    letter-spacing: 0 !important;
+}
+.footer-note {
+    bottom: 86px !important;
+    font-size: 14px !important;
+    line-height: 1.38 !important;
+    overflow: hidden !important;
+}
+.progress {
+    bottom: 96px !important;
+}
+body.edit-mode .slide.active [contenteditable="true"] {
+    outline: none !important;
+    background: transparent !important;
+}
+.triangle {
+    margin-top: 2px !important;
+    transform: scale(.84) !important;
+    transform-origin: top center !important;
+}
+.capacity {
+    margin-top: 10px !important;
+    padding: 12px 14px !important;
+}
+.capacity b {
+    font-size: 16px !important;
+    margin-bottom: 4px !important;
+}
+.capacity span {
+    font-size: 12px !important;
+    line-height: 1.26 !important;
+}
+.final-goal {
+    margin-top: 8px !important;
+    padding: 12px 14px !important;
+}
+.final-goal b {
+    font-size: 17px !important;
+    margin-bottom: 4px !important;
+}
+.stage-gates .flow-step {
+    min-height: 62px !important;
+}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage">
+<section class="slide active visible" data-slide="1">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">01<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">装配式专项设计中的项目管理思维</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从图纸交付<br/>到全过程项目治理</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:4"><div class="keyword">项目管理</div><div class="keyword">对象管理</div><div class="keyword">协调管理</div><div class="keyword">风险管理</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">问题提出</div>
+<p>装配式专项设计不只是图纸生产<br/>需要多边界、多阶段、多数据、多接口的协同管理</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>核心变化</h3>
+<p>相比传统项目，新增构件厂生产链和现场安装反馈链，设计端必须前置考虑生产与施工条件。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>评价标准升级</h3>
+<p>从“是否按时出图”升级为“里程碑是否兑现、装配率是否达标、变更是否可控、回款是否可实现”。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>专项团队管理主线可概括为“商务锁边界、技术锁方案、数据锁接口、流程锁责任、转型锁风险”。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>01 / 10</span></div>
+<div class="axis">
+<div class="axis-col">
+<div class="axis-title">管理对象扩展</div>
+<div class="object-list">
+<span>多边界</span><span>多阶段</span>
+<span>多数据</span><span>多接口</span>
+</div>
+</div>
+<div class="arrow"></div>
+<div class="axis-col">
+<div class="axis-title">新增关键接口链</div>
+<div class="chain">
+<div class="chain-item"><b>生产链</b><span>构件厂制造与交付条件</span></div>
+<div class="chain-item"><b>反馈链</b><span>现场安装与问题闭环</span></div>
+</div>
+</div>
+</div>
+<div class="locks">
+<div class="lock"><strong>商务</strong><span>锁边界</span></div>
+<div class="lock"><strong>技术</strong><span>锁方案</span></div>
+<div class="lock"><strong>数据</strong><span>锁接口</span></div>
+<div class="lock"><strong>流程</strong><span>锁责任</span></div>
+<div class="lock"><strong>转型</strong><span>锁风险</span></div>
+</div>
+<div class="upgrade">
+<div><b>里程碑</b><span>是否兑现</span></div>
+<div><b>装配率</b><span>是否达标</span></div>
+<div><b>变更</b><span>是否可控</span></div>
+<div><b>回款</b><span>是否可实现</span></div>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">01 / 10</div>
+</section>
+<section class="slide" data-slide="2">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">02<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">项目来源决定管理风险</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从项目来源<br/>到风险先验</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:4"><div class="keyword">院内分包</div><div class="keyword">院外承接</div><div class="keyword">协作承接</div><div class="keyword">生产施工端承接</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">项目来源影响</div>
+<p>项目来源多样，非工程技术端的影响因素较多</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>风险差异</h3>
+<p>院内项目重点在内部资源与结算口径，院外项目重点在合同主体、付款路径和跨组织接口。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>关键参与方</h3>
+<p>甲方/建设单位关注成果责任，总包/专业承包关注工期责任，构件厂关注制造与交付责任。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>承接项目前需结合工程来源进行多方面分析，评估项目设计过程中的管理风险，以明确可实施性。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>02 / 10</span></div>
+<div class="source-map">
+<div class="source-card"><b>院内专项分包</b><span>内部资源 / 结算口径 / 跨部门责任</span></div>
+<div class="source-card"><b>院外独立承接</b><span>合同主体 / 付款路径 / 成果责任</span></div>
+<div class="source-card"><b>院外协作承接</b><span>跨组织接口 / 分工边界 / 协同责任</span></div>
+</div>
+<div class="risk-bars">
+<div><span>资源协调</span><b style="width:76%"></b></div>
+<div><span>结算口径</span><b style="width:68%"></b></div>
+<div><span>合同主体</span><b style="width:86%"></b></div>
+<div><span>付款路径</span><b style="width:82%"></b></div>
+<div><span>接口复杂度</span><b style="width:92%"></b></div>
+</div>
+<div class="triangle">
+<div class="tri-node n-top">甲方<br/>建设单位</div>
+<div class="tri-node n-left">总包<br/>专业承包</div>
+<div class="tri-node n-right">构件厂</div>
+<div class="tri-center">成果责任<br/>工期责任<br/>交付责任</div>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">02 / 10</div>
+</section>
+<section class="slide" data-slide="3">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">03<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">合同治理框架：项目风险控制的第一道边界</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从合同边界<br/>到验收闭环</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">合同文件</div><div class="keyword">专用条款</div><div class="keyword">审查机制</div><div class="keyword">变更计费</div><div class="keyword">四层验收</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">合同构成</div>
+<p>协议书、通用条款、专用条款、发包人要求、技术标准、上一阶段图纸等共同定义项目边界。</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>重点条款</h3>
+<p>阶段划分、交付物清单、BIM深度、审查次数、驻场频次、工期基线、付款节点、延误责任。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>风险条款</h3>
+<p>范围模糊、只写“出图”、模型与图纸责任不明、驻场无计费依据、重复返工无补偿。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>验收应从单一“最终盖章图”扩展为“阶段验收、清单验收、数据验收、服务验收”。<br/>把控好合同条款内容至关重要，是项目进程中追溯责任主体的依据。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>03 / 10</span></div>
+<div class="doc-stack">
+<span>协议书</span><span>通用条款</span><span>专用条款</span><span>发包人要求</span><span>技术标准</span><span>阶段图纸</span>
+</div>
+<div class="clause-grid">
+<span>阶段划分</span><span>交付物清单</span><span>BIM深度</span><span>审查次数</span><span>驻场频次</span><span>付款节点</span>
+</div>
+<div class="risk-list">
+<div><b>高风险条款</b><span>乙方对设计文件出现的遗漏或错误负责修改或补充，图纸出错率应当控制在百<br/>分之五以内，在容错范围内，均为正常设计容错范围，免责追究。</span></div>
+</div>
+<div class="accept-grid">
+<span>阶段验收</span><span>清单验收</span><span>数据验收</span><span>服务验收</span>
+</div>
+</aside>
+
+<div class="progress mono">03 / 10</div>
+</section>
+<section class="slide" data-slide="4">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">04<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">方案与扩初阶段：技术路线管控</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从技术路线<br/>到前置冻结</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">系统集成</div><div class="keyword">模数化</div><div class="keyword">标准化</div><div class="keyword">少规格多组合</div><div class="keyword">预制/装配率测算</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">阶段定位</div>
+<p>方案/扩初不是概念阶段<br/>而是装配式技术路线策划管控阶段</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>核心成果</h3>
+<p>装配式专项技术说明、部品部件标准化策略、装配率指标测算成果。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>质量控制</h3>
+<p>结构体系选型、标准层复用率、构件复用率、外围护拼缝、防水防火、机电一体化。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>方案和扩初阶段的技术管控，决定了项目装配式专项设计的方向和大体路线，影响着甲方经济和技术性决策、设计院多专业协同方式、生产单位预制类型排产和总包单位施工方案布置。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>04 / 10</span></div>
+<div class="principles">
+<span>系统集成</span><span>通用化</span><span>模数化</span><span>标准化</span><span>少规格多组合</span>
+</div>
+<div class="gate-track">
+<div class="flow-step"><b>01</b><span>结构体系<br/>选型</span></div><div class="flow-step"><b>02</b><span>标准层<br/>复用率</span></div><div class="flow-step"><b>03</b><span>构件复用率</span></div><div class="flow-step"><b>04</b><span>外围护拼缝</span></div><div class="flow-step"><b>05</b><span>防水防火<br/>要求</span></div><div class="flow-step"><b>06</b><span>机电一体化</span></div>
+</div>
+<div class="ratio-panel">
+<b>把控预制/装配率测算指标</b><span>专项技术说明 + 部品部件标准化策略 + 指标测算成果</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">04 / 10</div>
+</section>
+<section class="slide" data-slide="5">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">05<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">施工图阶段：图纸敲定+校对审查管理</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从可读图纸<br/>到可生产成果</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">构件位置</div><div class="keyword">分块拼缝</div><div class="keyword">尺寸模数</div><div class="keyword">预留预埋</div><div class="keyword">图模一致</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">阶段目标</div>
+<p>全专业图纸交圈闭合，内部校对+送外审。</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>图纸要求</h3>
+<p>明确预制构件位置、拼缝、关键节点、尺寸链、设备管线接口、构件类型和编号规则。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>节点里程碑控制</h3>
+<p>专业内审、专业间拍图、施工图上传联审、审查意见修改、审图合格证。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>施工图阶段的核心是图纸质量管理和专业间协同。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>05 / 10</span></div>
+<div class="require-grid">
+<span>构件位置</span><span>分块拼缝</span><span>关键节点</span><span>尺寸链</span><span>预留预埋</span><span>设备管线接口</span>
+</div>
+<div class="milestone-line">
+<div class="flow-step"><b>01</b><span>专业内审</span></div><div class="flow-step"><b>02</b><span>专业间拍图</span></div><div class="flow-step"><b>03</b><span>上传联审</span></div><div class="flow-step"><b>04</b><span>意见修改</span></div><div class="flow-step"><b>05</b><span>审图合格证</span></div>
+</div>
+<div class="outcome-three">
+<span>工厂能生产</span><span>现场能安装</span><span>审查能闭环</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">05 / 10</div>
+</section>
+<section class="slide" data-slide="6">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">06<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">深化设计阶段<br/>图—模—清单—排产的数据闭环</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>精细化BIM模型<br/>到下游环节可真正落实的成果</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">深化BIM模型</div><div class="keyword">构件编码</div><div class="keyword">BOM清单</div><div class="keyword">工厂提资</div><div class="keyword">数据源校对</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">阶段本质</div>
+<p>深化设计是把施工图转换为可制造、可运输、可安装、可验收的数据成果。</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>核心抓手</h3>
+<p>BIM模型、构件拆分逻辑、构件编码、构件清单/BOM、工厂提资文件。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>数据闭环</h3>
+<p>BIM应与碰撞检查、工程量、进度分区、构件清单和排产挂钩。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>深化设计阶段管理的重点是“图纸—模型—清单—排产”实时数据成果进行串联，接收上下游环节的需求—落实—反馈。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>06 / 10</span></div>
+<div class="data-loop">
+<span>图纸</span><span>模型</span><span>清单</span><span>排产</span>
+</div>
+<div class="bim-grid">
+<span>碰撞检查</span><span>工程量统计</span><span>进度分区</span><span>构件清单</span><span>工厂提资</span><span>构件编码</span>
+</div>
+<div class="single-source">
+<b>单一事实源</b><span>所有变更同步更新图纸、模型、清单和工厂资料</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">06 / 10</div>
+</section>
+<section class="slide" data-slide="7">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">07<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">生产与施工后期服务：设计责任的现场延伸</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从后期服务<br/>到现场闭环</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">首件确认</div><div class="keyword">批量生产</div><div class="keyword">质量追溯</div><div class="keyword">变更修改</div><div class="keyword">竣工反馈</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">生产阶段</div>
+<p>重点管理首件确认、批量生产、生产质量追溯、存储运输和现场施工关键节点质量监督。</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>施工服务</h3>
+<p>重点管理吊装安装支持、现场问题响应、设计变更关闭、竣工数字交付。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>标准化工具</h3>
+<p>修改变更单配合三维模型数据反馈、竣工反馈清单。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>本环节着重需要注意深化成果和现场各专业工种间非图面逻辑的沟通交流和解答。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>07 / 10</span></div>
+<div class="service-flow">
+<div class="flow-step"><b>01</b><span>首件确认</span></div><div class="flow-step"><b>02</b><span>批量生产</span></div><div class="flow-step"><b>03</b><span>质量追溯</span></div><div class="flow-step"><b>04</b><span>到货匹配</span></div><div class="flow-step"><b>05</b><span>吊装安装</span></div><div class="flow-step"><b>06</b><span>变更修改</span></div><div class="flow-step"><b>07</b><span>竣工交付</span></div>
+</div>
+<div class="forms-grid">
+<span>技术修改单</span><span>现场问题单</span><span>生产施工需求反馈</span><span>变更影响分析单</span><span>竣工反馈清单</span>
+</div>
+<div class="closed-loop">
+<b>问题闭环</b><span>可记录 / 可追踪 / 可复盘</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">07 / 10</div>
+</section>
+<section class="slide" data-slide="8">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">08<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">团队内部治理：从个人能力到组织能力</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从个人经验<br/>到组织能力</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">项目经理</div><div class="keyword">专项负责人</div><div class="keyword">RACI</div><div class="keyword">容量管理</div><div class="keyword">知识库</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">角色分工</div>
+<p>项目经理负责进度、成本、合同、风险和外部沟通<br/>专项负责人负责技术路线、质量决策和阶段冻结</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>责任机制</h3>
+<p>用RACI矩阵明确执行、审批、征询和告知关系。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>资源配置</h3>
+<p>工作量分配应结合技能矩阵、项目优先级、里程碑压力、负荷率上限和跨项目共享规则。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>专项团队能力不能只沉淀在个人经验里，而要沉淀到职责矩阵、知识库和容量管理机制中。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>08 / 10</span></div>
+<table class="raci">
+<tr><th>事项</th><th>PM</th><th>专项负责</th><th>工程师</th><th>管理层</th></tr>
+<tr><td>进度成本合同</td><td>A/R</td><td>C</td><td>I</td><td>I</td></tr>
+<tr><td>技术路线</td><td>C</td><td>A/R</td><td>R</td><td>I</td></tr>
+<tr><td>质量决策</td><td>C</td><td>A</td><td>R</td><td>I</td></tr>
+<tr><td>外部沟通</td><td>A/R</td><td>C</td><td>I</td><td>I</td></tr>
+</table>
+<div class="knowledge-grid">
+<span>标准图集库</span><span>典型节点库</span><span>构件族库</span><span>审图问题库</span><span>项目复盘库</span>
+</div>
+<div class="capacity">
+<b>容量管理</b><span>R — Responsible（负责执行）<br/>A — Accountable（最终负责/审批）<br/>C — Consulted（征询意见）<br/>I — Informed（告知）</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">08 / 10</div>
+</section>
+<section class="slide" data-slide="9">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">09<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">向上沟通：把资源诉求转译为经营语言</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从资源诉求<br/>到经营语言</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">营收回款</div><div class="keyword">节点风险</div><div class="keyword">资源缺口</div><div class="keyword">KPI</div><div class="keyword">战略任务工时池</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">任务分类</div>
+<p>经营型任务、品牌/科研型任务、合规/支援型任务<br/>指派任务的投入产出不理想</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>汇报视角</h3>
+<p>月度或双周汇报应覆盖营收回款、阶段交付、节点风险、资源缺口、负荷率和外部约束。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>KPI升级</h3>
+<p>不只看合同额和出图量，还应看节点兑现率、变更修改率、装配率合规率、图模清单一致率。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>以领导关心的实际工作的数据信息“节点、成本、回款和品牌影响力”为向上沟通的切入点。<br/>急他之所急，以团队成长和项目顺利推进为第一目标，提诉求。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>09 / 10</span></div>
+<div class="task-types">
+<span>经营型任务</span><span>品牌/科研型任务</span><span>合规/支援型任务</span>
+</div>
+<div class="dashboard">
+<span>营收回款</span><span>阶段交付</span><span>节点风险</span><span>资源缺口</span><span>负荷率</span><span>外部约束</span>
+</div>
+<div class="kpi-grid">
+<span>节点兑现率</span><span>变更修改率</span><span>装配率合规率</span><span>图模清单一致率</span>
+</div>
+<div class="risk-translation">
+<b>资源缺口</b><span>站在经营者的视角进行向上沟通。</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">09 / 10</div>
+</section>
+<section class="slide" data-slide="10">
+<div class="topline"></div>
+<header class="header">
+<div class="page reveal">10<span></span></div>
+<div>
+<div class="eyebrow reveal delay-1">装配式专项设计中的项目管理</div>
+<h1 class="reveal delay-2">内部落地机制：模板化、试点化、制度化</h1>
+</div>
+<aside class="meta-panel reveal delay-2">
+<div class="tag">研究定位</div>
+<p>从试点模板<br/>到制度固化</p>
+</aside>
+</header>
+<section class="keyword-row reveal delay-3" style="--kw-count:5"><div class="keyword">管理模板</div><div class="keyword">试点项目</div><div class="keyword">阶段经验</div><div class="keyword">指标看板</div><div class="keyword">标准制度奖惩</div></section>
+<section class="core-band reveal delay-3">
+<div class="label mono">模板化</div>
+<p>建立合同评审表、RACI模板、项目台账<br/>变更登记表、构件编码规则</p>
+</section>
+<section class="left-grid">
+<article class="insight-card reveal delay-4">
+<div class="card-index mono">01</div>
+<div>
+<h3>试点化</h3>
+<p>选择标准层较多、界面清晰、甲方配合度较高的项目先试运行。</p>
+</div>
+</article>
+<article class="insight-card reveal delay-5">
+<div class="card-index mono">02</div>
+<div>
+<h3>制度化</h3>
+<p>形成合同评审、方案制定、施工图校对、工厂放行门、安装服务门、结项复盘门。</p>
+</div>
+</article>
+<article class="insight-card wide reveal delay-6">
+<div class="card-index mono">03</div>
+<div>
+<h3>结论表达</h3>
+<p>落实各项责任归属，设置奖惩机制。<br/>最终目标是把专项管理经验固化为可复制、可考核、可持续优化的团队制度。</p>
+</div>
+</article>
+</section>
+<aside class="right-model reveal delay-4">
+<div class="model-title mono"><span>研究模型</span><span>10 / 10</span></div>
+<div class="roadmap">
+<div><b>01 模板化</b><span>合同评审表/ RACI / 项目台账 / 变更登记表</span></div>
+<div><b>02 试点化</b><span>重难点项目管理制度的试点</span></div>
+<div><b>03 制度化</b><span>阶段经验总结机制 / 指标看板 / 项目复盘</span></div>
+</div>
+<div class="stage-gates">
+<div class="flow-step"><b>01</b><span>合同评审</span></div><div class="flow-step"><b>02</b><span>方案制定</span></div><div class="flow-step"><b>03</b><span>施工图校对</span></div><div class="flow-step"><b>04</b><span>工厂配合</span></div><div class="flow-step"><b>05</b><span>安装服务</span></div><div class="flow-step"><b>06</b><span>项目复盘</span></div>
+</div>
+<div class="final-goal">
+<b>最终目标</b><span>可复制、可考核、可持续优化的团队制度</span>
+</div>
+</aside>
+<div class="footer-note reveal delay-6"></div>
+<div class="progress mono">10 / 10</div>
+</section>
+</main>
+</div>
+<nav aria-label="slide controls" class="deck-controls">
+<button aria-label="上一页" data-prev="" type="button">‹</button>
+<div class="counter" data-counter="">01 / 10</div>
+<button aria-label="下一页" data-next="" type="button">›</button>
+</nav>
+<div aria-label="edit controls" class="edit-toolbar">
+<button data-edit-toggle="" type="button">编辑</button>
+<button data-edit-reset="" type="button">重置</button>
+<button data-edit-export="" type="button">导出HTML</button>
+<span class="edit-status" data-edit-status="">未编辑</span>
+</div>
+<script>
+(function () {
+  const stage = document.querySelector('.deck-stage');
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const counter = document.querySelector('[data-counter]');
+  const prevButton = document.querySelector('[data-prev]');
+  const nextButton = document.querySelector('[data-next]');
+  const editToggle = document.querySelector('[data-edit-toggle]');
+  const editReset = document.querySelector('[data-edit-reset]');
+  const editExport = document.querySelector('[data-edit-export]');
+  const editStatus = document.querySelector('[data-edit-status]');
+  const editableSelector = [
+    'h1',
+    '.keyword',
+    '.core-band .label',
+    '.core-band p',
+    '.insight-card h3',
+    '.insight-card p',
+    '.meta-panel p',
+    '.footer-note',
+    '.right-model .model-title span',
+    '.right-model .axis-title',
+    '.right-model span',
+    '.right-model b',
+    '.right-model strong',
+    '.right-model th',
+    '.right-model td',
+    '.right-model .tri-node',
+    '.right-model .tri-center'
+  ].join(',');
+  const storageKey = `scheme-a-edits:${location.pathname}`;
+  const editableNodes = Array.from(document.querySelectorAll(editableSelector));
+  let current = 0;
+  let locked = false;
+  let editMode = false;
+
+  function fit() {
+    const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+    const x = (window.innerWidth - 1920 * scale) / 2;
+    const y = (window.innerHeight - 1080 * scale) / 2;
+    stage.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+  }
+
+  function updateCounter() {
+    counter.textContent = `${String(current + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+  }
+
+  function clearAnimation(slide) {
+    slide.classList.remove('slide-in-next', 'slide-in-prev', 'slide-out-next', 'slide-out-prev');
+  }
+
+  function go(index, instant) {
+    if (index < 0 || index >= slides.length || index === current) return;
+    if (locked && !instant) return;
+    const direction = index > current ? 'next' : 'prev';
+    const previous = slides[current];
+    const incoming = slides[index];
+    locked = !instant;
+
+    clearAnimation(previous);
+    clearAnimation(incoming);
+
+    previous.classList.remove('active');
+    previous.classList.add('visible', direction === 'next' ? 'slide-out-next' : 'slide-out-prev');
+    incoming.classList.add('visible', 'active', direction === 'next' ? 'slide-in-next' : 'slide-in-prev');
+
+    current = index;
+    updateCounter();
+
+    const done = () => {
+      previous.classList.remove('visible', 'slide-out-next', 'slide-out-prev');
+      incoming.classList.remove('slide-in-next', 'slide-in-prev');
+      locked = false;
+    };
+
+    if (instant) {
+      done();
+    } else {
+      window.setTimeout(done, 820);
+    }
+  }
+
+  function step(delta) {
+    go(current + delta, false);
+  }
+
+  function setStatus(text) {
+    editStatus.textContent = text;
+  }
+
+  function assignEditIds() {
+    editableNodes.forEach((node, index) => {
+      const slide = node.closest('.slide');
+      const slideNo = slide ? slide.dataset.slide : '0';
+      node.dataset.editId = `s${slideNo}-${index}`;
+    });
+  }
+
+  function loadEdits() {
+    let edits = {};
+    try {
+      edits = JSON.parse(localStorage.getItem(storageKey) || '{}');
+    } catch (error) {
+      edits = {};
+    }
+    editableNodes.forEach((node) => {
+      if (Object.prototype.hasOwnProperty.call(edits, node.dataset.editId)) {
+        node.innerHTML = edits[node.dataset.editId];
+      }
+    });
+    if (Object.keys(edits).length) setStatus('已载入编辑');
+  }
+
+  function saveEdits() {
+    const edits = {};
+    editableNodes.forEach((node) => {
+      edits[node.dataset.editId] = node.innerHTML;
+    });
+    localStorage.setItem(storageKey, JSON.stringify(edits));
+    setStatus('已自动保存');
+  }
+
+  function setEditMode(enabled) {
+    editMode = enabled;
+    document.body.classList.toggle('edit-mode', enabled);
+    editableNodes.forEach((node) => {
+      node.contentEditable = enabled ? 'true' : 'false';
+      node.spellcheck = false;
+    });
+    editToggle.textContent = enabled ? '完成' : '编辑';
+    setStatus(enabled ? '可直接改字' : '浏览模式');
+  }
+
+  function resetEdits() {
+    const confirmed = window.confirm('确定清除当前浏览器里保存的编辑内容，并恢复为文稿原始内容吗？');
+    if (!confirmed) return;
+    localStorage.removeItem(storageKey);
+    location.reload();
+  }
+
+  function exportEditedHtml() {
+    setEditMode(false);
+    const clone = document.documentElement.cloneNode(true);
+    clone.querySelector('body').classList.remove('edit-mode');
+    clone.querySelectorAll('[contenteditable]').forEach((node) => {
+      node.removeAttribute('contenteditable');
+      node.removeAttribute('spellcheck');
+    });
+    clone.querySelectorAll('.slide').forEach((slide, index) => {
+      slide.classList.remove('active', 'visible', 'slide-in-next', 'slide-in-prev', 'slide-out-next', 'slide-out-prev');
+      if (index === current) slide.classList.add('active', 'visible');
+    });
+    const blob = new Blob(['<!doctype html>\n' + clone.outerHTML], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'research_scheme_a_10slides_edited.html';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    setStatus('已导出HTML');
+  }
+
+  window.addEventListener('resize', fit);
+  window.addEventListener('keydown', (event) => {
+    if (event.target && event.target.isContentEditable) return;
+    if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') step(1);
+    if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1);
+    if (event.key === 'Home') go(0, false);
+    if (event.key === 'End') go(slides.length - 1, false);
+  });
+
+  let wheelStamp = 0;
+  window.addEventListener('wheel', (event) => {
+    const now = Date.now();
+    if (now - wheelStamp < 900 || Math.abs(event.deltaY) < 24) return;
+    wheelStamp = now;
+    step(event.deltaY > 0 ? 1 : -1);
+  }, { passive: true });
+
+  let touchStartX = 0;
+  window.addEventListener('touchstart', (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+  window.addEventListener('touchend', (event) => {
+    const dx = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 48) step(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  prevButton.addEventListener('click', () => step(-1));
+  nextButton.addEventListener('click', () => step(1));
+  editToggle.addEventListener('click', () => setEditMode(!editMode));
+  editReset.addEventListener('click', resetEdits);
+  editExport.addEventListener('click', exportEditedHtml);
+  editableNodes.forEach((node) => {
+    node.addEventListener('input', saveEdits);
+  });
+
+  window.deck = {
+    go: (index, instant = false) => go(index, instant),
+    current: () => current,
+    count: () => slides.length
+  };
+
+  assignEditIds();
+  loadEdits();
+  fit();
+  updateCounter();
+})();
+</script>
+</body>
+</html>
